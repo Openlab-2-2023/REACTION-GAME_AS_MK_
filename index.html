@@ -3,11 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REACTION GAME</title>
-    <link rel="stylesheet" href="stylee.css">
-    <script src="script.js"></script>
+    <title>Reaction Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        #game {
+            width: 300px;
+            height: 300px;
+            background-color: gray;
+            position: relative;
+        }
+        .target {
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
-    
+    <h1>Click the Circle</h1>
+    <div id="game">
+        <div id="target" class="target" onclick="moveTarget()"></div>
+    </div>
+    <script>
+        function moveTarget() {
+            let target = document.getElementById("target");
+            let gameArea = document.getElementById("game");
+            target.style.left = Math.random() * (gameArea.clientWidth - 40) + "px";
+            target.style.top = Math.random() * (gameArea.clientHeight - 40) + "px";
+        }
+        moveTarget();
+    </script>
 </body>
 </html>
