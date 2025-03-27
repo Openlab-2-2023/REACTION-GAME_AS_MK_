@@ -1,7 +1,10 @@
 let score = 0;
+let totalClicks = 0;
 let gameMode = "easy";
 let timeoutID;
 let fakeTimeoutID;
+let gameTimer;
+let timeLeft = 30;
 
 function showClassicMenu() {
     document.getElementById("main-menu").style.display = "none";
@@ -19,26 +22,51 @@ function startGame(mode) {
     document.getElementById("game-container").style.display = "flex";
     document.getElementById("score").textContent = "Score: 0";
     score = 0;
+    totalClicks = 0;
+    
+    timeLeft = 30;
+    document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+    gameTimer = setInterval(updateTimer, 1000);
+
     moveTarget();
 }
 
-function endGame() {
-    document.getElementById("game-container").style.display = "none";
-    document.getElementById("main-menu").style.display = "flex";
-    score = 0;
-    document.getElementById("score").textContent = "Score: 0";
-    clearTimeout(timeoutID);
-    clearTimeout(fakeTimeoutID);
+function updateTimer() {
+    timeLeft--;
+    document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+
+    if (timeLeft <= 0) {
+        clearInterval(gameTimer);
+        endGame();
+    }
 }
 
+function endGame() {
+    clearInterval(gameTimer);
+    clearTimeout(timeoutID);
+    clearTimeout(fakeTimeoutID);
+
+    let accuracy = totalClicks > 0 ? ((score / totalClicks) * 100).toFixed(2) : 0;
+
+    document.getElementById("final-score").textContent = `Skóre: ${score}`;
+    document.getElementById("accuracy").textContent = `Presnosť: ${accuracy}% (${score}/${totalClicks})`;
+    document.getElementById("results-modal").style.display = "flex";
+}
+
+function backToMenu() {
+    document.getElementById("results-modal").style.display = "none";
+    window.location.href = "index.html";
+}
 function increaseScore() {
     score++;
+    totalClicks++;
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();
 }
 
 function decreaseScore() {
     score = Math.max(0, score - 1);
+    totalClicks++;
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();
 }

@@ -10,28 +10,9 @@
     <h1>Reaction Game</h1>
     
     <div id="main-menu">
-        <button class="btn" onclick="showClassicMenu()">Classic Mode</button>
+        <a href="classic.html"><button class="btn">Classic Mode</button></a>
         <button class="btn" onclick="alert('Speed Mode coming soon!')">Speed Mode (Coming Soon)</button>
         <button class="btn" onclick="alert('Tracking Mode coming soon!')">Tracking Mode (Coming Soon)</button>
     </div>
-
-    <div id="classic-menu" style="display: none;">
-        <button class="btn" onclick="startGame('easy')">Easy</button>
-        <button class="btn" onclick="startGame('normal')">Normal</button>
-        <button class="btn" onclick="startGame('hard')">Hard</button>
-        <button class="btn" onclick="startGame('ultra-hard')">Ultra Hard</button>
-        <button class="btn back" onclick="backToMainMenu()">Back</button>
-    </div>
-
-    <div id="game-container" style="display: none;">
-        <button class="btn end" onclick="endGame()">Ukončiť hru</button>
-        <div id="game">
-            <p id="score">Score: 0</p>
-            <div id="target" class="target" onclick="increaseScore()"></div>
-            <div id="fakeTarget" class="target fake" onclick="decreaseScore()"></div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
