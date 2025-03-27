@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Mode</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Classic Mode-EASY</h1>
+
+    <div id="classic-menu">
+        <button class="btn" onclick="startGame('easy')">Easy</button>
+        <button class="btn" onclick="startGame('normal')">Normal</button>
+        <button class="btn" onclick="startGame('hard')">Hard</button>
+        <button class="btn" onclick="startGame('ultra-hard')">Ultra Hard</button>
+        <a href="index.html"><button class="btn back">Back</button></a>
+    </div>
+
+    <div id="game-container" style="display: none;">
+        <button class="btn end" onclick="endGame()">Ukončiť hru</button>
+        <p id="timer">Time: 30s</p>
+        <p id="score">Score: 0</p>
+        <div id="game">
+            <div id="target" class="target" onclick="increaseScore()"></div>
+            <div id="fakeTarget" class="target fake" onclick="decreaseScore()"></div>
+        </div>
+    </div>
+  
+  
+    <div id="results-modal" class="modal">
+      <div class="modal-content">
+        <h2>Game Over!</h2>
+        <p id="final-score"></p>
+        <p id="accuracy"></p>
+        <button class="btn" onclick="backToMenu()">Späť do menu</button>
+      </div>
+   </div>
+
+
+    
+</body>
+</html>
