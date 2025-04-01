@@ -1,5 +1,7 @@
 let score = 0;
 let totalClicks = 0;
+let targetClicks = 0;
+let missedClicks = 0;
 let gameMode = "easy";
 let timeoutID;
 let fakeTimeoutID;
@@ -23,6 +25,8 @@ function startGame(mode) {
     document.getElementById("score").textContent = "Score: 0";
     score = 0;
     totalClicks = 0;
+    targetClicks = 0;
+    missedClicks = 0;
     
     timeLeft = 30;
     document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
@@ -46,10 +50,13 @@ function endGame() {
     clearTimeout(timeoutID);
     clearTimeout(fakeTimeoutID);
 
-    let accuracy = totalClicks > 0 ? ((score / totalClicks) * 100).toFixed(2) : 0;
+    let accuracy = totalClicks > 0 ? ((targetClicks / totalClicks) * 100).toFixed(2) : 0;
 
-    document.getElementById("final-score").textContent = `Skóre: ${score}`;
-    document.getElementById("accuracy").textContent = `Presnosť: ${accuracy}% (${score}/${totalClicks})`;
+    document.getElementById("final-score").textContent = `Score: ${score}`;
+    document.getElementById("accuracy").textContent = `Accuracy: ${accuracy}%`;
+    document.getElementById("clicks-count").textContent = `Total Clicks: ${totalClicks}`;
+    document.getElementById("target-clicks").textContent = `Target Clicks: ${targetClicks}`;
+    document.getElementById("missed-clicks").textContent = `Missed Clicks: ${missedClicks}`;
     document.getElementById("results-modal").style.display = "flex";
 }
 
@@ -60,6 +67,7 @@ function backToMenu() {
 
 function increaseScore() {
     score++;
+    targetClicks++;
     totalClicks++;
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();
@@ -67,6 +75,7 @@ function increaseScore() {
 
 function decreaseScore() {
     score = Math.max(0, score - 1);
+    missedClicks++;
     totalClicks++;
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();

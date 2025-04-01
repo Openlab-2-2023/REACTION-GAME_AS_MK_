@@ -51,6 +51,13 @@ h1 {
     align-items: center;
 }
 
+#score {
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    margin-top: 20px;
+}
+
 #timer {
     position: fixed;
     top: 10px;
@@ -77,6 +84,7 @@ h1 {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .target {
@@ -92,8 +100,18 @@ h1 {
     display: none;
 }
 
+.end {
+    margin-top: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-.modal {
+#results-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -111,4 +129,8 @@ h1 {
     border-radius: 10px;
     text-align: center;
     color: white;
+}
+
+.modal-content p {
+    margin: 10px 0;
 }
