@@ -1,7 +1,10 @@
 let score = 0;
 let totalClicks = 0;
+<<<<<<< HEAD
 let targetClicks = 0;
 let missedClicks = 0;
+=======
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
 let gameMode = "easy";
 let timeoutID;
 let fakeTimeoutID;
@@ -25,8 +28,11 @@ function startGame(mode) {
     document.getElementById("score").textContent = "Score: 0";
     score = 0;
     totalClicks = 0;
+<<<<<<< HEAD
     targetClicks = 0;
     missedClicks = 0;
+=======
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
     
     timeLeft = 30;
     document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
@@ -50,6 +56,7 @@ function endGame() {
     clearTimeout(timeoutID);
     clearTimeout(fakeTimeoutID);
 
+<<<<<<< HEAD
     missedClicks = totalClicks - targetClicks; // Calculate missed clicks
 
     let accuracy = totalClicks > 0 ? ((targetClicks / totalClicks) * 100).toFixed(2) : 0;
@@ -58,6 +65,12 @@ function endGame() {
     document.getElementById("accuracy").textContent = `Accuracy: ${accuracy}% (${targetClicks}/${totalClicks})`;
     document.getElementById("miss-clicks").textContent = `Missed Clicks: ${missedClicks}`;
     document.getElementById("clicks").textContent = `Total Clicks: ${totalClicks}`;
+=======
+    let accuracy = totalClicks > 0 ? ((score / totalClicks) * 100).toFixed(2) : 0;
+
+    document.getElementById("final-score").textContent = `Skóre: ${score}`;
+    document.getElementById("accuracy").textContent = `Presnosť: ${accuracy}% (${score}/${totalClicks})`;
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
     document.getElementById("results-modal").style.display = "flex";
 }
 
@@ -65,23 +78,37 @@ function backToMenu() {
     document.getElementById("results-modal").style.display = "none";
     window.location.href = "index.html";
 }
+<<<<<<< HEAD
 
 function increaseScore() {
     score++;
     targetClicks++;  // Count a click on the target
     totalClicks++;   // Count the total click
+=======
+function increaseScore() {
+    score++;
+    totalClicks++;
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();
 }
 
 function decreaseScore() {
+<<<<<<< HEAD
     totalClicks++;   // Count a click on the fake target or elsewhere
     missedClicks++;  // Count a miss
+=======
+    score = Math.max(0, score - 1);
+    totalClicks++;
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
 function moveTarget() {
     let target = document.getElementById("target");
     let fakeTarget = document.getElementById("fakeTarget");
@@ -122,4 +149,8 @@ function moveTarget() {
         target.style.display = "none";
         moveTarget();
     }, hideTime);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746

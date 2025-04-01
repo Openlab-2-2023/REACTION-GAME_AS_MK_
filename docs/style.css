@@ -17,7 +17,10 @@ h1 {
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
 #main-menu, #classic-menu {
     display: flex;
     flex-direction: column;
@@ -51,6 +54,7 @@ h1 {
     align-items: center;
 }
 
+<<<<<<< HEAD
 #score {
     font-size: 40px;
     font-weight: bold;
@@ -58,6 +62,8 @@ h1 {
     margin-top: 20px;
 }
 
+=======
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
 #timer {
     position: fixed;
     top: 10px;
@@ -84,7 +90,10 @@ h1 {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
+<<<<<<< HEAD
     margin-bottom: 20px;
+=======
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
 }
 
 .target {
@@ -100,6 +109,7 @@ h1 {
     display: none;
 }
 
+<<<<<<< HEAD
 .end {
     margin-top: 20px;
     background-color: red;
@@ -112,6 +122,10 @@ h1 {
 }
 
 #results-modal {
+=======
+
+.modal {
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
     display: none;
     position: fixed;
     top: 0;
@@ -129,8 +143,12 @@ h1 {
     border-radius: 10px;
     text-align: center;
     color: white;
+<<<<<<< HEAD
 }
 
 .modal-content p {
     margin: 10px 0;
 }
+=======
+}
+>>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
