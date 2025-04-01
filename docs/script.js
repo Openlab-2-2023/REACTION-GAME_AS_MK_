@@ -50,13 +50,14 @@ function endGame() {
     clearTimeout(timeoutID);
     clearTimeout(fakeTimeoutID);
 
+    missedClicks = totalClicks - targetClicks; // Calculate missed clicks
+
     let accuracy = totalClicks > 0 ? ((targetClicks / totalClicks) * 100).toFixed(2) : 0;
 
     document.getElementById("final-score").textContent = `Score: ${score}`;
-    document.getElementById("accuracy").textContent = `Accuracy: ${accuracy}%`;
-    document.getElementById("clicks-count").textContent = `Total Clicks: ${totalClicks}`;
-    document.getElementById("target-clicks").textContent = `Target Clicks: ${targetClicks}`;
-    document.getElementById("missed-clicks").textContent = `Missed Clicks: ${missedClicks}`;
+    document.getElementById("accuracy").textContent = `Accuracy: ${accuracy}% (${targetClicks}/${totalClicks})`;
+    document.getElementById("miss-clicks").textContent = `Missed Clicks: ${missedClicks}`;
+    document.getElementById("clicks").textContent = `Total Clicks: ${totalClicks}`;
     document.getElementById("results-modal").style.display = "flex";
 }
 
@@ -67,19 +68,19 @@ function backToMenu() {
 
 function increaseScore() {
     score++;
-    targetClicks++;
-    totalClicks++;
+    targetClicks++;  // Count a click on the target
+    totalClicks++;   // Count the total click
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();
 }
 
 function decreaseScore() {
-    score = Math.max(0, score - 1);
-    missedClicks++;
-    totalClicks++;
+    totalClicks++;   // Count a click on the fake target or elsewhere
+    missedClicks++;  // Count a miss
     document.getElementById("score").textContent = "Score: " + score;
     moveTarget();
 }
+
 
 function moveTarget() {
     let target = document.getElementById("target");
