@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Mode</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="tracking.js" defer></script>
+</head>
+<body>
+    <h1>Tracking Mode</h1>
+    <div id="game-timer">Čas: 0.0 s</div>
+    <div id="game-container">   
+        <div id="game">
+            <div id="movingTarget" class="target tracking-target"></div>
+        </div>
+    </div>
+
+    <div id="results-modal" class="modal">
+        <div class="modal-content">
+            <h2>Koniec hry!</h2>
+            <p id="final-hold-time"></p>
+            <button class="btn" onclick="backToMenu()">Späť do menu</button>
+        </div>
+    </div>
+</body>
+</html>
