@@ -9,19 +9,16 @@ body {
     font-family: Arial, sans-serif;
     flex-direction: column;
     text-align: center;
-}
-
-h1 {
+  }
+  
+  h1 {
     font-size: 42px;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 20px;
-}
-<<<<<<< HEAD
-
-=======
->>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
-#main-menu, #classic-menu {
+  }
+  
+  #main-menu, #classic-menu {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,9 +26,9 @@ h1 {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.btn {
+  }
+  
+  .btn {
     padding: 12px 24px;
     font-size: 20px;
     background: linear-gradient(45deg, #ff9800, #ff5722);
@@ -41,30 +38,20 @@ h1 {
     margin: 10px;
     border-radius: 8px;
     transition: 0.3s;
-}
-
-.btn:hover {
+  }
+  
+  .btn:hover {
     transform: scale(1.1);
-}
-
-#game-container {
+  }
+  
+  #game-container {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-<<<<<<< HEAD
-#score {
-    font-size: 40px;
-    font-weight: bold;
-    color: white;
-    margin-top: 20px;
-}
-
-=======
->>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
-#timer {
+  }
+  
+  #timer {
     position: fixed;
     top: 10px;
     right: 50px;
@@ -76,13 +63,9 @@ h1 {
     box-shadow: 0 0 10px rgba(255, 69, 0, 0.8);
     border: 2px solid white;
     transition: 0.3s;
-}
-
-#timer:hover {
-    transform: scale(1.1);
-}
-
-#game {
+  }
+  
+  #game {
     width: 600px;
     height: 600px;
     background: rgba(255, 255, 255, 0.1);
@@ -90,42 +73,23 @@ h1 {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
-<<<<<<< HEAD
-    margin-bottom: 20px;
-=======
->>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
-}
-
-.target {
+    cursor: crosshair;
+  }
+  
+  .target {
     width: 50px;
     height: 50px;
     background-color: darkorange;
     position: absolute;
     border-radius: 50%;
-}
-
-.fake {
+  }
+  
+  .fake {
     background-color: red;
     display: none;
-}
-
-<<<<<<< HEAD
-.end {
-    margin-top: 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-#results-modal {
-=======
-
-.modal {
->>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
+  }
+  
+  .modal {
     display: none;
     position: fixed;
     top: 0;
@@ -135,20 +99,13 @@ h1 {
     background: rgba(0, 0, 0, 0.7);
     justify-content: center;
     align-items: center;
-}
-
-.modal-content {
+  }
+  
+  .modal-content {
     background: #222;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
     color: white;
-<<<<<<< HEAD
-}
-
-.modal-content p {
-    margin: 10px 0;
-}
-=======
-}
->>>>>>> 2aabe090d209be3d30ef37593482905f04bbd746
+  }
+  
