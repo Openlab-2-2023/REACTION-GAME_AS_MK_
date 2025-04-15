@@ -42,6 +42,7 @@ function increaseScore(e) {
   e.stopPropagation();
   score++;
   targetClicks++;
+  totalClicks++;
   document.getElementById("score").textContent = `Score: ${score}`;
   moveTarget();
 }
@@ -49,6 +50,7 @@ function increaseScore(e) {
 function decreaseScore(e) {
   e.stopPropagation();
   score = Math.max(0, score - 1);
+  totalClicks++;
   document.getElementById("score").textContent = `Score: ${score}`;
   moveTarget();
 }
@@ -59,8 +61,13 @@ function endGame() {
   clearTimeout(fakeTimeoutID);
   document.getElementById("game").removeEventListener("click", handleGameClick);
 
-  const missedClicks = totalClicks - targetClicks;
-  const accuracy = totalClicks > 0 ? ((targetClicks / totalClicks) * 100).toFixed(2) : 0;
+  const missedClicks = Math.max(0, totalClicks - targetClicks);
+  let accuracy = 0;
+
+  if (totalClicks > 0) {
+    accuracy = ((targetClicks / totalClicks) * 100);
+    accuracy = Math.min(Math.max(accuracy, 0), 100).toFixed(2);
+  }
 
   document.getElementById("final-score").textContent = `Score: ${score}`;
   document.getElementById("total-clicks").textContent = `Total Clicks: ${totalClicks}`;
