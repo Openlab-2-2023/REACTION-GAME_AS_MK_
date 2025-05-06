@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Tracking Mode</h1>
-    <div id="game-timer">Čas: 0.0 s</div>
+    <div id="game-timer">Time: 0.0 s</div>
     <div id="game-container">   
         <div id="game">
             <div id="movingTarget" class="target tracking-target"></div>
@@ -18,9 +18,11 @@
 
     <div id="results-modal" class="modal">
         <div class="modal-content">
-            <h2>Koniec hry!</h2>
+            <h2>Game Over!</h2>
             <p id="final-hold-time"></p>
-            <button class="btn" onclick="backToMenu()">Späť do menu</button>
+            <button class="btn" onclick="backToMenu()">Menu</button>
+            <button class="btn" onclick="restartGame()">Play again</button>
+            <button class="btn" onclick="exitToGamemode()">Modes</button>
         </div>
     </div>
 </body>

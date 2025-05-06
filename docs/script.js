@@ -118,3 +118,12 @@ function moveTarget() {
     moveTarget();
   }, hideTime);
 }
+
+  function exitToGamemode() {
+    window.location.href = "home_page.html";
+  }
+  function restartGame() {
+    document.getElementById("results-modal").style.display = "none";
+    window.location.href = "classic.html";
+  }
+  

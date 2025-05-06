@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function startGame() {
         timerInterval = setInterval(() => {
             elapsedTime += 0.1;
-            gameTimer.textContent = `Čas: ${elapsedTime.toFixed(1)} s`;
+            gameTimer.textContent = `TIME: ${elapsedTime.toFixed(1)} s`;
         }, 100);
 
         moveInterval = setInterval(() => {
@@ -103,12 +103,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const modal = document.getElementById("results-modal");
         const finalTime = document.getElementById("final-hold-time");
 
-        finalTime.textContent = `Čas na guličke: ${timeSpent.toFixed(2)} sekúnd`;
+        finalTime.textContent = `Time on ball: ${timeSpent.toFixed(2)} seconds`;
         modal.style.display = "flex";
     }
 });
 
-function backToMenu() {
-    document.getElementById("results-modal").style.display = "none";
-    window.location.href = "index.html";
-}
+    function backToMenu() {
+        document.getElementById("results-modal").style.display = "none";
+        window.location.href = "index.html";
+    }
+
+    function exitToGamemode() {
+        document.getElementById("results-modal").style.display = "none";
+        window.location.href = "home_page.html";
+    }
+    
+    function restartGame() {
+        document.getElementById("results-modal").style.display = "none";
+        window.location.href = "tracking.html";
+    }
+    
