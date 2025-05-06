@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Speed Mode</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="speed.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reakčný Čas</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Reaction Mode</h1>
+  <h1>Speed Mode</h1>
+
   <div id="reaction-box">
+    <p id="instruction">Hold the button and wait for green signal !</p>
+
     <div class="lights">
       <div class="light" id="light-1"></div>
       <div class="light" id="light-2"></div>
@@ -18,20 +20,24 @@
       <div class="light" id="light-5"></div>
       <div class="light green" id="light-go"></div>
     </div>
-    <p id="instruction">Hold the button and wait for green signal !!</p>
-    <button id="hold-button" class="btn">HOLD</button>
+
+    <button id="hold-button" class="btn">Hold</button>
   </div>
 
   <div id="results-modal" class="modal">
     <div class="modal-content">
       <h2 id="result-title"></h2>
       <p id="reaction-time"></p>
+      <p id="rank"></p>
       <div class="modal-buttons">
         <button class="btn" onclick="exitToMenu()">Menu</button>
-        <button class="btn" onclick="restartGame()">Play again</button>
-        <button class="btn" onclick="exitToGamemode()"> Modes</button>
+        <button class="btn" onclick="restartGame()">Try again</button>
+        <button class="btn" onclick="exitToGamemode()">Modes</button>
+
       </div>
     </div>
   </div>
+
+  <script src="speed.js"></script>
 </body>
 </html>
