@@ -24,6 +24,11 @@ function startGame(mode) {
   moveTarget();
 }
 
+function playSound() {
+  const audio = new Audio("targethit.mp3");
+  audio.play();
+}
+
 function updateTimer() {
   timeLeft--;
   document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
@@ -34,11 +39,13 @@ function updateTimer() {
 }
 
 function handleGameClick(e) {
+  playSound();
   totalClicks++;
   document.getElementById("score").textContent = `Score: ${score}`;
 }
 
 function increaseScore(e) {
+  playSound();
   e.stopPropagation();
   score++;
   targetClicks++;
@@ -48,11 +55,33 @@ function increaseScore(e) {
 }
 
 function decreaseScore(e) {
+  playSound();
   e.stopPropagation();
   score = Math.max(0, score - 1);
   totalClicks++;
   document.getElementById("score").textContent = `Score: ${score}`;
   moveTarget();
+}
+
+function fakeTargetHit() {
+  score = 0;
+  totalClicks = 0;
+  targetClicks = 0;
+
+  clearInterval(gameTimer);
+  clearTimeout(timeoutID);
+  clearTimeout(fakeTimeoutID);
+  document.getElementById("game").removeEventListener("click", handleGameClick);
+
+  document.getElementById("final-score").textContent = `Score: ${score}`;
+  document.getElementById("total-clicks").textContent = `Total Clicks: ${totalClicks}`;
+  document.getElementById("target-clicks").textContent = `Target Clicks: ${targetClicks}`;
+  document.getElementById("missed-clicks").textContent = `Missed Clicks: 0`;
+  document.getElementById("accuracy").textContent = `Accuracy: 0%`;
+
+  document.getElementById("result-title").textContent = "Chyba!";
+  document.getElementById("reaction-time").textContent = "Klikol si na falošný cieľ!";
+  document.getElementById("results-modal").style.display = "flex";
 }
 
 function endGame() {
@@ -75,7 +104,22 @@ function endGame() {
   document.getElementById("missed-clicks").textContent = `Missed Clicks: ${missedClicks}`;
   document.getElementById("accuracy").textContent = `Accuracy: ${accuracy}%`;
 
+  saveClassicResult(score, targetClicks, missedClicks, accuracy);
   document.getElementById("results-modal").style.display = "flex";
+}
+
+function saveClassicResult(score, hits, misses, accuracy) {
+  const key = "leaderboard_classic";
+  const existing = JSON.parse(localStorage.getItem(key)) || [];
+
+  existing.push({
+    score,
+    hits,
+    misses,
+    accuracy: `${accuracy}`
+  });
+
+  localStorage.setItem(key, JSON.stringify(existing));
 }
 
 function backToMenu() {
@@ -109,6 +153,7 @@ function moveTarget() {
       fakeTarget.style.left = fx + "px";
       fakeTarget.style.top = fy + "px";
       fakeTarget.style.display = "block";
+      fakeTarget.addEventListener("click", fakeTargetHit);
       fakeTimeoutID = setTimeout(() => fakeTarget.style.display = "none", 700);
     }
   } else if (gameMode === "ultra-hard") hideTime = 500;
@@ -119,11 +164,11 @@ function moveTarget() {
   }, hideTime);
 }
 
-  function exitToGamemode() {
-    window.location.href = "home_page.html";
-  }
-  function restartGame() {
-    document.getElementById("results-modal").style.display = "none";
-    window.location.href = "classic.html";
-  }
-  
+function exitToGamemode() {
+  window.location.href = "home_page.html";
+}
+
+function restartGame() {
+  document.getElementById("results-modal").style.display = "none";
+  window.location.href = "classic.html";
+}

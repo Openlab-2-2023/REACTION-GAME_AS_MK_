@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🏆Leaderboard</h1>
+
+  <div class="mode-section">
+    <h2>🎯 Classic Mode</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>Target Hits</th>
+          <th>Miss</th>
+          <th>Accurancy</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-classic"></tbody>
+    </table>
+  </div>
+
+  <div class="mode-section">
+    <h2>🧭 Tracking Mode</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>Target Hits</th>
+          <th>Miss</th>
+          <th>Accurancy</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-tracking">
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mode-section">
+    <h2>⚡ Speed Mode</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>Target Hits</th>
+          <th>Miss</th>
+          <th>Accurancy</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboard-speed">
+      </tbody>
+    </table>
+  </div>
+
+  <a href="index.html"><button class="btn">Main Menu</button></a>
+
+  <script>
+    function loadLeaderboard(mode, elementId) {
+      const data = JSON.parse(localStorage.getItem("leaderboard_" + mode)) || [];
+      const tbody = document.getElementById(elementId);
+      tbody.innerHTML = "";
+
+      data.slice().reverse().forEach(entry => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${entry.score}</td>
+          <td>${entry.hits}</td>
+          <td>${entry.misses}</td>
+          <td>${entry.accuracy}%</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+
+    loadLeaderboard("classic", "leaderboard-classic");
+    
+  </script>
+</body>
+</html>
