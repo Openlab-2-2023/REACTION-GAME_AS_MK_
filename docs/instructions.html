@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Game Instructions - Reaction Game">
+  <title>Game Instructions</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.instructions-container {
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  position: relative;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 15px;
+  color: #f0a500;
+}
+
+p, ul {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 20px;
+}
+
+li {
+  margin: 5px 0;
+}
+
+.navigation-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.navigation-buttons button {
+  background-color: #f0a500;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #121212;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+.navigation-buttons button:hover {
+  background-color: #d68b00;
+}
+
+.mode-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.instructions-section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.instructions-section.active {
+  display: block;
+  opacity: 1;
+}
+
+  </style>
+</head>
+<body>
+  <div class="instructions-container">
+    <h1>GAME INSTRUCTIONS</h1>
+
+    <div class="mode-switcher">
+      <button id="prev-mode" onclick="switchMode(-1)">⬅️</button>
+      <span id="mode-title">switch mode</span>
+      <button id="next-mode" onclick="switchMode(1)">➡️</button>
+    </div>
+
+    <div id="instructions-classic" class="instructions-section active">
+        <h1>CLASSIC MODE </h1>
+    
+        <h2>Game Start:</h2>
+        <p>The player selects a game mode (Easy, Normal, Hard, Ultra-Hard).</p>
+        <p>The game area and target will appear, and the timer will start.</p>
+    
+        <h2>Game Modes Description:</h2>
+        <ul>
+          <li><strong>Easy:</strong> The target appears and stays visible for <strong>2 seconds (2000 ms)</strong>.</li>
+          <li><strong>Normal:</strong> The target appears and stays visible for <strong>1 second (1000 ms)</strong>.</li>
+          <li><strong>Hard:</strong> The target appears for <strong>1 second (1000 ms)</strong>, with a <strong>50% chance of a fake target</strong> appearing, which disappears after <strong>700 ms</strong> (clicking it will reset the score).</li>
+          <li><strong>Ultra-Hard:</strong> The target appears and disappears in <strong>0.5 seconds (500 ms)</strong>.</li>
+        </ul>
+    
+        <h2>Clicking on the Target:</h2>
+        <p>The player clicks on the moving target.</p>
+        <p>If they hit it, the score increases, and a sound is played.</p>
+        <p>If they miss, the score remains the same (or decreases for a fake target).</p>
+    
+        <h2>Time Limit:</h2>
+        <p>The game lasts for <strong>30 seconds</strong>.</p>
+        <p>After the time is up, the game ends and a results window is displayed.</p>
+    <div class="navigation-buttons">
+      <button onclick="window.location.href='home_page.html'">Back to Menu</button>
+      <button onclick="window.location.href='classic.html'">Start Game</button>
+    </div>
+  </div>
+
+  <script>
+    let currentMode = 0;
+    const modes = ["Classic Mode", "Reaction Mode"];
+    const sections = document.querySelectorAll(".instructions-section");
+
+    function switchMode(direction) {
+      sections[currentMode].classList.remove("active");
+      currentMode = (currentMode + direction + sections.length) % sections.length;
+      sections[currentMode].classList.add("active");
+      document.getElementById("mode-title").textContent = modes[currentMode];
+    }
+  </script>
+</body>
+</html>
