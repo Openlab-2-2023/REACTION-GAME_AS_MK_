@@ -7,6 +7,7 @@
   <title>Game Instructions</title>
   <style>
     body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23FF9909' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23FF7D27'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
   font-family: Arial, sans-serif;
   background-color: #121212;
   color: #f5f5f5;
@@ -93,17 +94,66 @@ li {
   display: block;
   opacity: 1;
 }
+ .navigation-buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .navigation-buttons button {
+      background-color: #f0a500;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #121212;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+      transition: background-color 0.3s;
+    }
+     .mode-switcher {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .mode-switcher button {
+      background: none;
+      border: 2px solid #f0a500;
+      padding: 5px 15px;
+      cursor: pointer;
+      color: #f0a500;
+      font-size: 1rem;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .mode-switcher button:hover {
+      background: #f0a500;
+      color: #121212;
+    }
+
+    #mode-title {
+      font-size: 1.5rem;
+      color: #f0a500;
+      transition: opacity 0.5s ease;
+      opacity: 1;
+    }
+
+    .navigation-buttons button:hover {
+      background-color: #d68b00;
+    }
 
   </style>
 </head>
 <body>
   <div class="instructions-container">
-    <h1>GAME INSTRUCTIONS</h1>
+    <h1> INSTRUCTIONS</h1>
 
     <div class="mode-switcher">
-      <button id="prev-mode" onclick="switchMode(-1)">⬅️</button>
-      <span id="mode-title">switch mode</span>
-      <button id="next-mode" onclick="switchMode(1)">➡️</button>
+      <button id="prev-mode" onclick="switchMode(-1)">❮ Previous</button>
+      <span id="mode-title" class="fade">SWITCH MODE</span>
+      <button id="next-mode" onclick="switchMode(1)">Next ❯</button>
     </div>
 
     <div id="instructions-classic" class="instructions-section active">
@@ -129,22 +179,52 @@ li {
         <h2>Time Limit:</h2>
         <p>The game lasts for <strong>30 seconds</strong>.</p>
         <p>After the time is up, the game ends and a results window is displayed.</p>
-    <div class="navigation-buttons">
+     
+        <div class="navigation-buttons">
       <button onclick="window.location.href='home_page.html'">Back to Menu</button>
-      <button onclick="window.location.href='classic.html'">Start Game</button>
+      <button id="start-game" onclick="startGame()">Start Game</button>
     </div>
   </div>
 
   <script>
     let currentMode = 0;
-    const modes = ["Classic Mode", "Reaction Mode"];
-    const sections = document.querySelectorAll(".instructions-section");
+    const modes = ["Classic Mode", "Speed Mode"];
+    const descriptions = [
+      `<p><strong>Classic Mode:</strong> Test your reaction speed across different difficulty levels.</p>
+       <ul>
+         <li><strong>Easy:</strong> Target appears for 2 seconds.</li>
+         <li><strong>Normal:</strong> Target appears for 1 second.</li>
+         <li><strong>Hard:</strong> Target appears for 1 second, 50% chance of fake target.</li>
+         <li><strong>Ultra-Hard:</strong> Target appears for 0.5 seconds.</li>
+       </ul>`,
+      `<p><strong>Speed Mode:</strong> Hit as many targets as possible within the time limit.</p>
+       <ul>
+         <li>Targets appear randomly on the screen.</li>
+         <li>Click a target to score a point.</li>
+         <li>If you miss, you lose time but your score remains unchanged.</li>
+         <li>The game ends when the timer runs out.</li>
+       </ul>`
+    ];
 
     function switchMode(direction) {
-      sections[currentMode].classList.remove("active");
-      currentMode = (currentMode + direction + sections.length) % sections.length;
-      sections[currentMode].classList.add("active");
-      document.getElementById("mode-title").textContent = modes[currentMode];
+      document.getElementById("mode-title").style.opacity = 0;
+      document.getElementById("mode-description").style.opacity = 0;
+      
+      setTimeout(() => {
+        currentMode = (currentMode + direction + modes.length) % modes.length;
+        document.getElementById("mode-title").textContent = modes[currentMode];
+        document.getElementById("mode-description").innerHTML = descriptions[currentMode];
+        document.getElementById("mode-title").style.opacity = 1;
+        document.getElementById("mode-description").style.opacity = 1;
+      }, 300);
+    }
+
+    function startGame() {
+      if (currentMode === 0) {
+        window.location.href = 'classic.html';
+      } else if (currentMode === 1) {
+        window.location.href = 'speed.html';
+      }
     }
   </script>
 </body>

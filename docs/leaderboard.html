@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -17,7 +16,7 @@
           <th>Score</th>
           <th>Target Hits</th>
           <th>Miss</th>
-          <th>Accurancy</th>
+          <th>Accuracy</th>
         </tr>
       </thead>
       <tbody id="leaderboard-classic"></tbody>
@@ -29,14 +28,11 @@
     <table>
       <thead>
         <tr>
-          <th>Score</th>
-          <th>Target Hits</th>
-          <th>Miss</th>
-          <th>Accurancy</th>
+          <th>Ranking</th>
+          <th>Time on Ball (s)</th>
         </tr>
       </thead>
-      <tbody id="leaderboard-tracking">
-      </tbody>
+      <tbody id="leaderboard-tracking"></tbody>
     </table>
   </div>
 
@@ -48,14 +44,14 @@
           <th>Score</th>
           <th>Target Hits</th>
           <th>Miss</th>
-          <th>Accurancy</th>
+          <th>Accuracy</th>
         </tr>
       </thead>
-      <tbody id="leaderboard-speed">
-      </tbody>
+      <tbody id="leaderboard-speed"></tbody>
     </table>
   </div>
 
+  <button class="btn" onclick="resetLeaderboard()">Reset Leaderboard</button>
   <a href="index.html"><button class="btn">Main Menu</button></a>
 
   <script>
@@ -76,12 +72,42 @@
       });
     }
 
-    function goBack() {
-      window.location.href = "index.html";
+    function getRank(time) {
+      if (time <= 0.2) return "TOP 1%";
+      if (time <= 0.25) return "TOP 5%";
+      if (time <= 0.3) return "TOP 10%";
+      if (time <= 0.4) return "Above Average";
+      if (time <= 0.5) return "Average";
+      if (time <= 0.7) return "Below Average";
+      return "Too slow";
+    }
+
+    function loadTrackingLeaderboard() {
+      const data = JSON.parse(localStorage.getItem("leaderboard_tracking")) || [];
+      const tbody = document.getElementById("leaderboard-tracking");
+      tbody.innerHTML = "";
+
+      data.slice().reverse().forEach(entry => {
+        const rank = getRank(parseFloat(entry.holdTime));
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${rank}</td>
+          <td>${entry.holdTime}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function resetLeaderboard() {
+      localStorage.clear();
+      loadLeaderboard("classic", "leaderboard-classic");
+      loadTrackingLeaderboard();
+      loadLeaderboard("speed", "leaderboard-speed");
     }
 
     loadLeaderboard("classic", "leaderboard-classic");
-    
+    loadTrackingLeaderboard();
+    loadLeaderboard("speed", "leaderboard-speed");
   </script>
 </body>
 </html>
