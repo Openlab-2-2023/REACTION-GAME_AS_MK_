@@ -116,7 +116,8 @@ function saveClassicResult(score, hits, misses, accuracy) {
     score,
     hits,
     misses,
-    accuracy: `${accuracy}`
+    accuracy: `${accuracy}`,
+    mode: gameMode
   });
 
   localStorage.setItem(key, JSON.stringify(existing));

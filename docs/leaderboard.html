@@ -17,6 +17,7 @@
           <th>Target Hits</th>
           <th>Miss</th>
           <th>Accuracy</th>
+          <th>Difficulty</th>
         </tr>
       </thead>
       <tbody id="leaderboard-classic"></tbody>
@@ -67,6 +68,7 @@
           <td>${entry.hits}</td>
           <td>${entry.misses}</td>
           <td>${entry.accuracy}%</td>
+          <td>${entry.mode || "?"}</td>
         `;
         tbody.appendChild(row);
       });

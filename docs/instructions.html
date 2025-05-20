@@ -1,121 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Game Instructions - Reaction Game">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Game Instructions</title>
   <style>
     body {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23FF9909' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23FF7D27'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
-  font-family: Arial, sans-serif;
-  background-color: #121212;
-  color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.instructions-container {
-  background-color: #1e1e1e;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 600px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  text-align: left;
-  position: relative;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.5rem;
-  margin-top: 15px;
-  color: #f0a500;
-}
-
-p, ul {
-  font-size: 1rem;
-  margin: 10px 0;
-}
-
-ul {
-  list-style-type: square;
-  padding-left: 20px;
-}
-
-li {
-  margin: 5px 0;
-}
-
-.navigation-buttons {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.navigation-buttons button {
-  background-color: #f0a500;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: #121212;
-  cursor: pointer;
-  border-radius: 5px;
-  margin: 5px;
-  transition: background-color 0.3s;
-}
-
-.navigation-buttons button:hover {
-  background-color: #d68b00;
-}
-
-.mode-switcher {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.instructions-section {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.instructions-section.active {
-  display: block;
-  opacity: 1;
-}
- .navigation-buttons {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    .navigation-buttons button {
-      background-color: #f0a500;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      color: #121212;
-      cursor: pointer;
-      border-radius: 5px;
-      margin: 5px;
-      transition: background-color 0.3s;
-    }
-     .mode-switcher {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 10px;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      text-align: left;
+    }
+
+    .mode-switcher {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .mode-switcher span {
+      color: #f0a500;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
 
     .mode-switcher button {
@@ -125,106 +46,155 @@ li {
       cursor: pointer;
       color: #f0a500;
       font-size: 1rem;
-      transition: background 0.3s, color 0.3s;
+      transition: 0.3s;
     }
 
     .mode-switcher button:hover {
-      background: #f0a500;
+      background-color: #f0a500;
       color: #121212;
     }
 
-    #mode-title {
-      font-size: 1.5rem;
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    h2 {
       color: #f0a500;
-      transition: opacity 0.5s ease;
-      opacity: 1;
+      margin-top: 20px;
+    }
+
+    p, li {
+      font-size: 1rem;
+      margin: 5px 0;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    .navigation-buttons {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .navigation-buttons button {
+      background-color: #f0a500;
+      color: #121212;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 5px;
+      transition: 0.3s;
     }
 
     .navigation-buttons button:hover {
       background-color: #d68b00;
     }
 
+    .instructions-section {
+      display: none;
+    }
+
+    .instructions-section.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
-  <div class="instructions-container">
-    <h1> INSTRUCTIONS</h1>
-
+  <div class="container">
     <div class="mode-switcher">
-      <button id="prev-mode" onclick="switchMode(-1)">❮ Previous</button>
-      <span id="mode-title" class="fade">SWITCH MODE</span>
-      <button id="next-mode" onclick="switchMode(1)">Next ❯</button>
+      <button onclick="switchMode(-1)">❮ Previous</button>
+      <span id="mode-title">CLASSIC MODE</span>
+      <button onclick="switchMode(1)">Next ❯</button>
     </div>
 
-    <div id="instructions-classic" class="instructions-section active">
-        <h1>CLASSIC MODE </h1>
-    
-        <h2>Game Start:</h2>
-        <p>The player selects a game mode (Easy, Normal, Hard, Ultra-Hard).</p>
-        <p>The game area and target will appear, and the timer will start.</p>
-    
-        <h2>Game Modes Description:</h2>
-        <ul>
-          <li><strong>Easy:</strong> The target appears and stays visible for <strong>2 seconds (2000 ms)</strong>.</li>
-          <li><strong>Normal:</strong> The target appears and stays visible for <strong>1 second (1000 ms)</strong>.</li>
-          <li><strong>Hard:</strong> The target appears for <strong>1 second (1000 ms)</strong>, with a <strong>50% chance of a fake target</strong> appearing, which disappears after <strong>700 ms</strong> (clicking it will reset the score).</li>
-          <li><strong>Ultra-Hard:</strong> The target appears and disappears in <strong>0.5 seconds (500 ms)</strong>.</li>
-        </ul>
-    
-        <h2>Clicking on the Target:</h2>
-        <p>The player clicks on the moving target.</p>
-        <p>If they hit it, the score increases, and a sound is played.</p>
-        <p>If they miss, the score remains the same (or decreases for a fake target).</p>
-    
-        <h2>Time Limit:</h2>
-        <p>The game lasts for <strong>30 seconds</strong>.</p>
-        <p>After the time is up, the game ends and a results window is displayed.</p>
-     
-        <div class="navigation-buttons">
+    <div id="classic" class="instructions-section active">
+      <h1>CLASSIC MODE</h1>
+      <h2>Game Start:</h2>
+      <p>The player selects a game mode (Easy, Normal, Hard, Ultra-Hard).</p>
+      <p>The game area and target will appear, and the timer will start.</p>
+
+      <h2>Game Modes Description:</h2>
+      <ul>
+        <li><strong>Easy:</strong> The target appears and stays visible for <strong>2 seconds (2000 ms)</strong>.</li>
+        <li><strong>Normal:</strong> The target appears and stays visible for <strong>1 second (1000 ms)</strong>.</li>
+        <li><strong>Hard:</strong> The target appears for <strong>1 second (1000 ms)</strong>, with a <strong>50% chance of a fake target</strong> appearing, which disappears after <strong>700 ms</strong> (clicking it will reset the score).</li>
+        <li><strong>Ultra-Hard:</strong> The target appears and disappears in <strong>0.5 seconds (500 ms)</strong>.</li>
+      </ul>
+
+      <h2>Clicking on the Target:</h2>
+      <p>The player clicks on the moving target.</p>
+      <p>If they hit it, the score increases, and a sound is played.</p>
+      <p>If they miss, the score remains the same (or decreases for a fake target).</p>
+
+      <h2>Time Limit:</h2>
+      <p>The game lasts for <strong>30 seconds</strong>.</p>
+      <p>After the time is up, the game ends and a results window is displayed.</p>
+    </div>
+
+    <div id="tracking" class="instructions-section">
+      <h1>TRACKING MODE</h1>
+      <h2>Game Start:</h2>
+      <p>The player clicks the target to begin tracking mode. The ball starts moving right after.</p>
+
+      <h2>How It Works:</h2>
+      <ul>
+        <li>Your goal is to follow the moving ball with your mouse for as long as possible.</li>
+        <li>As soon as you lose contact with the ball, the timer stops.</li>
+        <li>The game measures how long you were able to track the ball without losing it.</li>
+      </ul>
+
+      <h2>Scoring:</h2>
+      <p>Your final time is your score — the longer you follow the ball, the better!</p>
+    </div>
+
+    <div id="speed" class="instructions-section">
+      <h1>SPEED MODE</h1>
+      <h2>Game Start:</h2>
+      <p>The player must hold down the button when the light is red, and release it as fast as possible when the green light appears.</p>
+
+      <h2>How It Works:</h2>
+      <ul>
+        <li>Red light countdown simulates "Ready...Set..."</li>
+        <li>When the green light turns on, the player must release immediately.</li>
+        <li>Releasing too early shows "False Start" and the player loses.</li>
+        <li>Reaction time is measured in milliseconds (ms).</li>
+      </ul>
+
+      <h2>Scoring:</h2>
+      <p>The faster you release after green, the better your score.</p>
+      <p>Leaderboard ranks players by best reaction time.</p>
+    </div>
+
+    <div class="navigation-buttons">
       <button onclick="window.location.href='home_page.html'">Back to Menu</button>
-      <button id="start-game" onclick="startGame()">Start Game</button>
+      <button onclick="startGame()">Start Game</button>
     </div>
   </div>
 
   <script>
-    let currentMode = 0;
-    const modes = ["Classic Mode", "Speed Mode"];
-    const descriptions = [
-      `<p><strong>Classic Mode:</strong> Test your reaction speed across different difficulty levels.</p>
-       <ul>
-         <li><strong>Easy:</strong> Target appears for 2 seconds.</li>
-         <li><strong>Normal:</strong> Target appears for 1 second.</li>
-         <li><strong>Hard:</strong> Target appears for 1 second, 50% chance of fake target.</li>
-         <li><strong>Ultra-Hard:</strong> Target appears for 0.5 seconds.</li>
-       </ul>`,
-      `<p><strong>Speed Mode:</strong> Hit as many targets as possible within the time limit.</p>
-       <ul>
-         <li>Targets appear randomly on the screen.</li>
-         <li>Click a target to score a point.</li>
-         <li>If you miss, you lose time but your score remains unchanged.</li>
-         <li>The game ends when the timer runs out.</li>
-       </ul>`
-    ];
+    const modes = ["classic", "tracking", "speed"];
+    const titles = ["CLASSIC MODE", "TRACKING MODE", "SPEED MODE"];
+    let current = 0;
 
-    function switchMode(direction) {
-      document.getElementById("mode-title").style.opacity = 0;
-      document.getElementById("mode-description").style.opacity = 0;
-      
-      setTimeout(() => {
-        currentMode = (currentMode + direction + modes.length) % modes.length;
-        document.getElementById("mode-title").textContent = modes[currentMode];
-        document.getElementById("mode-description").innerHTML = descriptions[currentMode];
-        document.getElementById("mode-title").style.opacity = 1;
-        document.getElementById("mode-description").style.opacity = 1;
-      }, 300);
+    function switchMode(dir) {
+      document.getElementById(modes[current]).classList.remove("active");
+      current = (current + dir + modes.length) % modes.length;
+      document.getElementById(modes[current]).classList.add("active");
+      document.getElementById("mode-title").textContent = titles[current];
     }
 
     function startGame() {
-      if (currentMode === 0) {
-        window.location.href = 'classic.html';
-      } else if (currentMode === 1) {
-        window.location.href = 'speed.html';
-      }
+      const redirects = ["classic.html", "tracking.html", "speed.html"];
+      window.location.href = redirects[current];
     }
   </script>
 </body>
