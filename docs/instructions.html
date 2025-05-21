@@ -9,6 +9,7 @@
       background-color: #121212;
       color: white;
       font-family: Arial, sans-serif;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23FF9909' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23FF7D27'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
       margin: 0;
       padding: 0;
       display: flex;
@@ -19,18 +20,21 @@
 
     .container {
       max-width: 800px;
+      width: 100%;
       background-color: #1e1e1e;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      text-align: left;
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
     }
 
     .mode-switcher {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .mode-switcher span {
@@ -52,6 +56,15 @@
     .mode-switcher button:hover {
       background-color: #f0a500;
       color: #121212;
+    }
+
+    .instructions-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto;
+      padding-right: 10px;
     }
 
     h1 {
@@ -80,7 +93,7 @@
 
     .navigation-buttons {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 10px;
     }
 
     .navigation-buttons button {
@@ -116,62 +129,62 @@
       <button onclick="switchMode(1)">Next ❯</button>
     </div>
 
-    <div id="classic" class="instructions-section active">
-      <h1>CLASSIC MODE</h1>
-      <h2>Game Start:</h2>
-      <p>The player selects a game mode (Easy, Normal, Hard, Ultra-Hard).</p>
-      <p>The game area and target will appear, and the timer will start.</p>
+    <div class="instructions-wrapper">
+      <div id="classic" class="instructions-section active">
+        <h1>CLASSIC MODE</h1>
+        <h2>Game Start:</h2>
+        <p>The player selects a game mode (Easy, Normal, Hard, Ultra-Hard).</p>
+        <p>The game area and target will appear, and the timer will start.</p>
 
-      <h2>Game Modes Description:</h2>
-      <ul>
-        <li><strong>Easy:</strong> The target appears and stays visible for <strong>2 seconds (2000 ms)</strong>.</li>
-        <li><strong>Normal:</strong> The target appears and stays visible for <strong>1 second (1000 ms)</strong>.</li>
-        <li><strong>Hard:</strong> The target appears for <strong>1 second (1000 ms)</strong>, with a <strong>50% chance of a fake target</strong> appearing, which disappears after <strong>700 ms</strong> (clicking it will reset the score).</li>
-        <li><strong>Ultra-Hard:</strong> The target appears and disappears in <strong>0.5 seconds (500 ms)</strong>.</li>
-      </ul>
+        <h2>Game Modes Description:</h2>
+        <ul>
+          <li><strong>Easy:</strong> The target appears and stays visible for <strong>2 seconds (2000 ms)</strong>.</li>
+          <li><strong>Normal:</strong> The target appears and stays visible for <strong>1 second (1000 ms)</strong>.</li>
+          <li><strong>Hard:</strong> The target appears for <strong>1 second (1000 ms)</strong>, with a <strong>50% chance of a fake target</strong> appearing, which disappears after <strong>700 ms</strong> (clicking it will reset the score).</li>
+          <li><strong>Ultra-Hard:</strong> The target appears and disappears in <strong>0.5 seconds (500 ms)</strong>.</li>
+        </ul>
 
-      <h2>Clicking on the Target:</h2>
-      <p>The player clicks on the moving target.</p>
-      <p>If they hit it, the score increases, and a sound is played.</p>
-      <p>If they miss, the score remains the same (or decreases for a fake target).</p>
+        <h2>Clicking on the Target:</h2>
+        <p>The player clicks on the moving target.</p>
+        <p>If they hit it, the score increases, and a sound is played.</p>
+        <p>If they miss, the score remains the same (or decreases for a fake target).</p>
 
-      <h2>Time Limit:</h2>
-      <p>The game lasts for <strong>30 seconds</strong>.</p>
-      <p>After the time is up, the game ends and a results window is displayed.</p>
-    </div>
+        <h2>Time Limit:</h2>
+        <p>The game lasts for <strong>30 seconds</strong>.</p>
+        <p>After the time is up, the game ends and a results window is displayed.</p>
+      </div>
 
-    <div id="tracking" class="instructions-section">
-      <h1>TRACKING MODE</h1>
-      <h2>Game Start:</h2>
-      <p>The player clicks the target to begin tracking mode. The ball starts moving right after.</p>
+      <div id="tracking" class="instructions-section">
+        <h1>TRACKING MODE</h1>
+        <h2>Game Start:</h2>
+        <p>The player clicks the target to begin tracking mode. The ball starts moving right after.</p>
 
-      <h2>How It Works:</h2>
-      <ul>
-        <li>Your goal is to follow the moving ball with your mouse for as long as possible.</li>
-        <li>As soon as you lose contact with the ball, the timer stops.</li>
-        <li>The game measures how long you were able to track the ball without losing it.</li>
-      </ul>
+        <h2>How It Works:</h2>
+        <ul>
+          <li>Your goal is to follow the moving ball with your mouse for as long as possible.</li>
+          <li>As soon as you lose contact with the ball, the timer stops.</li>
+          <li>The game measures how long you were able to track the ball without losing it.</li>
+        </ul>
 
-      <h2>Scoring:</h2>
-      <p>Your final time is your score — the longer you follow the ball, the better!</p>
-    </div>
+        <h2>Scoring:</h2>
+        <p>Your final time is your score — the longer you follow the ball, the better!</p>
+      </div>
 
-    <div id="speed" class="instructions-section">
-      <h1>SPEED MODE</h1>
-      <h2>Game Start:</h2>
-      <p>The player must hold down the button when the light is red, and release it as fast as possible when the green light appears.</p>
+      <div id="speed" class="instructions-section">
+        <h1>SPEED MODE</h1>
+        <h2>Game Start:</h2>
+        <p>Hold the button on red, release instantly on green.</p>
 
-      <h2>How It Works:</h2>
-      <ul>
-        <li>Red light countdown simulates "Ready...Set..."</li>
-        <li>When the green light turns on, the player must release immediately.</li>
-        <li>Releasing too early shows "False Start" and the player loses.</li>
-        <li>Reaction time is measured in milliseconds (ms).</li>
-      </ul>
+        <h2>How It Works:</h2>
+        <ul>
+          <li>Red = Ready...Set...</li>
+          <li>Green = Go! Release quickly.</li>
+          <li>Too early = False Start = loss.</li>
+        </ul>
 
-      <h2>Scoring:</h2>
-      <p>The faster you release after green, the better your score.</p>
-      <p>Leaderboard ranks players by best reaction time.</p>
+        <h2>Scoring:</h2>
+        <p>Fastest release time wins. Ranked by reaction time.</p>
+      </div>
     </div>
 
     <div class="navigation-buttons">
@@ -190,12 +203,14 @@
       current = (current + dir + modes.length) % modes.length;
       document.getElementById(modes[current]).classList.add("active");
       document.getElementById("mode-title").textContent = titles[current];
+      adjustVerticalAlignment();
     }
 
     function startGame() {
       const redirects = ["classic.html", "tracking.html", "speed.html"];
       window.location.href = redirects[current];
     }
+
   </script>
 </body>
 </html>

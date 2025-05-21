@@ -98,22 +98,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  function endGame() {
-    clearInterval(moveInterval);
-    clearInterval(speedInterval);
-    clearInterval(timerInterval);
+ function endGame() {
+  clearInterval(moveInterval);
+  clearInterval(speedInterval);
+  clearInterval(timerInterval);
 
-    const modal = document.getElementById("results-modal");
-    const finalTime = document.getElementById("final-hold-time");
+  const modal = document.getElementById("results-modal");
+  const finalTime = document.getElementById("final-hold-time");
+  const finalRank = document.getElementById("final-rank");
 
-    const cleanHoldTime = Math.max(0, timeSpent).toFixed(2);
-    const cleanElapsed = Math.max(0.1, elapsedTime).toFixed(1); // aby nebolo delenie nulou
+  const cleanHoldTime = Math.max(0, timeSpent).toFixed(2);
+  const cleanElapsed = Math.max(0.1, elapsedTime).toFixed(1);
+  const rank = getTrackingRank(parseFloat(cleanHoldTime));
 
-    finalTime.textContent = `Time on ball: ${cleanHoldTime} seconds`;
-    modal.style.display = "flex";
+  finalTime.textContent = `Time on Ball: ${cleanHoldTime} seconds`;
+  finalRank.textContent = `Rank: ${rank}`;
+  modal.style.display = "flex";
 
-    saveTrackingResult(cleanHoldTime, cleanElapsed);
-  }
+  saveTrackingResult(cleanHoldTime, cleanElapsed);
+}
+
 });
 
 function backToMenu() {
@@ -131,6 +135,16 @@ function restartGame() {
   window.location.href = "tracking.html";
 }
 
+function getTrackingRank(holdTime) {
+  if (holdTime >= 12) return "TOP 1%";
+  if (holdTime >= 10) return "TOP 5%";
+  if (holdTime >= 8) return "TOP 10%";
+  if (holdTime >= 6) return "Above Average";
+  if (holdTime >= 4) return "Average";
+  if (holdTime >= 2) return "Below Average";
+  return "skill issue lil bro";
+}
+
 function saveTrackingResult(holdTimeStr, totalTimeStr) {
   const key = "leaderboard_tracking";
   let data = [];
@@ -143,12 +157,12 @@ function saveTrackingResult(holdTimeStr, totalTimeStr) {
 
   const holdTime = parseFloat(holdTimeStr);
   const totalTime = parseFloat(totalTimeStr);
-  const averageHold = totalTime > 0 ? (holdTime / totalTime).toFixed(2) : "0.00";
+  const rank = getTrackingRank(holdTime);
 
   const entry = {
     holdTime: holdTime.toFixed(2),
     totalTime: totalTime.toFixed(1),
-    averageHold,
+    rank,
     timestamp: new Date().toLocaleString("sk-SK")
   };
 
@@ -161,4 +175,4 @@ function saveTrackingResult(holdTimeStr, totalTimeStr) {
     console.error("Chyba pri ukladaní do localStorage:", e);
   }
 }
-    
+

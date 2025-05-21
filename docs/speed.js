@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!greenLight) {
       document.getElementById("reaction-box").classList.add("red");
-      showResult("Too early!", "You lost!  You let go before the green.");
+      showResult("Too early!", "You let go before the green.");
     } else {
       const endTime = performance.now();
       const reaction = (endTime - startTime) / 1000;
@@ -63,26 +63,11 @@ function showResult(title, message, rank = "") {
     ? `Tvoje hodnotenie: ${rank}`
     : "";
   document.getElementById("results-modal").style.display = "flex";
-}
 
-function restartGame() {
-  document.getElementById("results-modal").style.display = "none";
-  document.getElementById("instruction").textContent = "Hold the button and wait for green signal !";
-  document.getElementById("reaction-box").classList.remove("green", "red");
-
-  for (let i = 1; i <= 5; i++) {
-    document.getElementById(`light-${i}`).classList.remove("on");
+  if (title === "Reaction time") {
+    const reactionSeconds = parseFloat(message);
+    addToSpeedLeaderboard(reactionSeconds, rank);
   }
-  document.getElementById("light-go").classList.remove("on");
-}
-
-function exitToMenu() {
-  window.location.href = "index.html";
-}
-
-function exitToGamemode() {
-  document.getElementById("results-modal").style.display = "none";
-  window.location.href = "home_page.html";
 }
 
 function getRank(time) {
@@ -93,4 +78,25 @@ function getRank(time) {
   if (time <= 0.5) return "Average";
   if (time <= 0.7) return "Below Average";
   return "Too slow";
+}
+
+function addToSpeedLeaderboard(reactionTime, rank) {
+  const leaderboard = JSON.parse(localStorage.getItem("leaderboard_speed")) || [];
+
+  const newEntry = {
+    reactionTime: reactionTime.toFixed(3),
+    rank: rank
+  };
+
+  leaderboard.push(newEntry);
+  localStorage.setItem("leaderboard_speed", JSON.stringify(leaderboard));
+}
+
+function exitToMenu() {
+  window.location.href = "index.html";
+}
+
+function exitToGamemode() {
+  document.getElementById("results-modal").style.display = "none";
+  window.location.href = "home_page.html";
 }

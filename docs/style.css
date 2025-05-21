@@ -299,3 +299,46 @@ h1 {
   .back-button:hover {
     background-color: #e68900;
   }
+  .container {
+  width: 800px;
+  height: 600px;
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* schová všetko, čo vyčnieva */
+}
+
+.instructions-wrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  min-height: 0;
+}
+
+.instructions-section {
+  display: none;
+  padding-bottom: 20px;
+}
+
+.instructions-section.active {
+  display: block;
+}
+.leaderboard-wrapper {
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+html, body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+
+

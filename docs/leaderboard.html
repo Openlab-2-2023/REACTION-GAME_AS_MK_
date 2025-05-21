@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
   <meta charset="UTF-8" />
   <title>Leaderboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <h1>🏆Leaderboard</h1>
 
+<body>
+    <div class="leaderboard-wrapper">
+
+  <h1>🏆 Leaderboard</h1>
+
+  <!-- Classic Mode -->
   <div class="mode-section">
     <h2>🎯 Classic Mode</h2>
     <table>
@@ -24,41 +29,67 @@
     </table>
   </div>
 
+  <!-- Tracking Mode -->
   <div class="mode-section">
     <h2>🧭 Tracking Mode</h2>
     <table>
       <thead>
         <tr>
-          <th>Ranking</th>
           <th>Time on Ball (s)</th>
+          <th>Rank</th>
         </tr>
       </thead>
       <tbody id="leaderboard-tracking"></tbody>
     </table>
+
   </div>
 
+  <!-- Speed Mode -->
   <div class="mode-section">
     <h2>⚡ Speed Mode</h2>
     <table>
       <thead>
         <tr>
-          <th>Score</th>
-          <th>Target Hits</th>
-          <th>Miss</th>
-          <th>Accuracy</th>
+          <th>Time on Ball (s)</th>
+          <th>Avg Hold Ratio</th>
         </tr>
       </thead>
       <tbody id="leaderboard-speed"></tbody>
     </table>
   </div>
 
+  <!-- Buttons -->
   <button class="btn" onclick="resetLeaderboard()">Reset Leaderboard</button>
   <a href="index.html"><button class="btn">Main Menu</button></a>
 
+  <!-- Leaderboard Script -->
   <script>
     function loadLeaderboard(mode, elementId) {
       const data = JSON.parse(localStorage.getItem("leaderboard_" + mode)) || [];
       const tbody = document.getElementById(elementId);
+      tbody.innerHTML = "";
+
+      data.slice().reverse().forEach(entry => {
+        const row = document.createElement("tr");
+
+        // For tracking and speed modes
+        if (mode === "tracking" || mode === "speed") {
+          const reactionTime = entry.holdTime || entry.reactionTime || "N/A";
+          const rank = entry.averageHold || entry.rank || "N/A";
+
+          row.innerHTML = `
+            <td>${reactionTime}</td>
+            <td>${rank}</td>
+          `;
+        }
+
+        tbody.appendChild(row);
+      });
+    }
+
+    function loadClassicLeaderboard() {
+      const data = JSON.parse(localStorage.getItem("leaderboard_classic")) || [];
+      const tbody = document.getElementById("leaderboard-classic");
       tbody.innerHTML = "";
 
       data.slice().reverse().forEach(entry => {
@@ -74,42 +105,19 @@
       });
     }
 
-    function getRank(time) {
-      if (time <= 0.2) return "TOP 1%";
-      if (time <= 0.25) return "TOP 5%";
-      if (time <= 0.3) return "TOP 10%";
-      if (time <= 0.4) return "Above Average";
-      if (time <= 0.5) return "Average";
-      if (time <= 0.7) return "Below Average";
-      return "Too slow";
-    }
-
-    function loadTrackingLeaderboard() {
-      const data = JSON.parse(localStorage.getItem("leaderboard_tracking")) || [];
-      const tbody = document.getElementById("leaderboard-tracking");
-      tbody.innerHTML = "";
-
-      data.slice().reverse().forEach(entry => {
-        const rank = getRank(parseFloat(entry.holdTime));
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${rank}</td>
-          <td>${entry.holdTime}</td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
     function resetLeaderboard() {
       localStorage.clear();
-      loadLeaderboard("classic", "leaderboard-classic");
-      loadTrackingLeaderboard();
+      loadClassicLeaderboard();
+      loadLeaderboard("tracking", "leaderboard-tracking");
       loadLeaderboard("speed", "leaderboard-speed");
     }
 
-    loadLeaderboard("classic", "leaderboard-classic");
-    loadTrackingLeaderboard();
-    loadLeaderboard("speed", "leaderboard-speed");
+    document.addEventListener("DOMContentLoaded", () => {
+      loadClassicLeaderboard();
+      loadLeaderboard("tracking", "leaderboard-tracking");
+      loadLeaderboard("speed", "leaderboard-speed");
+    });
   </script>
 </body>
+
 </html>
