@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tracking Game</title>
   <link rel="stylesheet" href="style.css" />
+
 </head>
+
 <body>
   <div id="game-container">
     <h1>Tracking Mode</h1>
-    <div id="game" style="position: relative; width: 600px; height: 600px;">
+    <div id="game">
       <div id="movingTarget" class="tracking-target"></div>
     </div>
+    <button class="btn end" onclick="endGame()">End Game</button>
     <div id="game-timer">TIME: 0.0 s</div>
   </div>
 
   <div id="results-modal" class="modal">
-  <div class="modal-content">
-    <h2>Results</h2>
-    <p id="final-hold-time"></p>
-    <p id="final-rank"></p> <!-- Add this if it's missing -->
-    <div class="modal-buttons">
-      <button class="btn" onclick="restartGame()">Play again</button>
-      <button class="btn" onclick="backToMenu()">Main menu</button>
-      <button class="btn" onclick="exitToGamemode()">Modes</button>
+    <div class="modal-content">
+      <h2>Results</h2>
+      <p id="final-hold-time"></p>
+      <p id="final-rank"></p>
+      <div class="modal-buttons">
+        <button class="btn" onclick="backToMenu()">Main menu</button>
+        <button class="btn" onclick="restartGame()">Play again</button>
+        <button class="btn" onclick="exitToGamemode()">Game Modes</button>
+      </div>
     </div>
   </div>
-</div>
 
   <script src="tracking.js"></script>
 </body>
+
 </html>

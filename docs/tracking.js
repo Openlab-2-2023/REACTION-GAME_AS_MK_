@@ -1,7 +1,7 @@
 let timeSpent = 0;
 let isTracking = false;
 let moveInterval;
-let speed = 2;
+let speed = 1.85;
 const speedIncrease = 0.2;
 let speedInterval;
 let timerInterval;
@@ -10,11 +10,11 @@ let gameStarted = false;
 
 document.addEventListener("DOMContentLoaded", function () {
   const target = document.getElementById("movingTarget");
-  const gameContainer = document.getElementById("game-container");
+  const game = document.getElementById("game");
   const gameTimer = document.getElementById("game-timer");
 
-  let x = gameContainer.clientWidth / 2;
-  let y = gameContainer.clientHeight / 2;
+  let x = game.clientWidth / 2;
+  let y = game.clientHeight / 2;
 
   let angle = Math.random() * 2 * Math.PI;
   let dx = Math.cos(angle) * speed;
@@ -33,18 +33,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 100);
 
     moveInterval = setInterval(() => {
+      const containerWidth = game.clientWidth;
+      const containerHeight = game.clientHeight;
+      const targetWidth = target.offsetWidth;
+      const targetHeight = target.offsetHeight;
+
       x += dx;
       y += dy;
 
-      if (x <= 0 || x >= gameContainer.clientWidth - target.clientWidth) {
+      if (x <= 0) {
+        x = 0;
         dx *= -1;
-        dx += (Math.random() - 0.5) * 0.5;
-        dy += (Math.random() - 0.5) * 0.5;
+      } else if (x + targetWidth >= containerWidth) {
+        x = containerWidth - targetWidth;
+        dx *= -1;
       }
-      if (y <= 0 || y >= gameContainer.clientHeight - target.clientHeight) {
+
+      if (y <= 0) {
+        y = 0;
         dy *= -1;
-        dx += (Math.random() - 0.5) * 0.5;
-        dy += (Math.random() - 0.5) * 0.5;
+      } else if (y + targetHeight >= containerHeight) {
+        y = containerHeight - targetHeight;
+        dy *= -1;
       }
 
       if (Math.random() < 0.05) {
@@ -98,26 +108,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
- function endGame() {
-  clearInterval(moveInterval);
-  clearInterval(speedInterval);
-  clearInterval(timerInterval);
+  function endGame() {
+    clearInterval(moveInterval);
+    clearInterval(speedInterval);
+    clearInterval(timerInterval);
 
-  const modal = document.getElementById("results-modal");
-  const finalTime = document.getElementById("final-hold-time");
-  const finalRank = document.getElementById("final-rank");
+    const modal = document.getElementById("results-modal");
+    const finalTime = document.getElementById("final-hold-time");
+    const finalRank = document.getElementById("final-rank");
 
-  const cleanHoldTime = Math.max(0, timeSpent).toFixed(2);
-  const cleanElapsed = Math.max(0.1, elapsedTime).toFixed(1);
-  const rank = getTrackingRank(parseFloat(cleanHoldTime));
+    const cleanHoldTime = Math.max(0, timeSpent).toFixed(2);
+    const cleanElapsed = Math.max(0.1, elapsedTime).toFixed(1);
+    const rank = getTrackingRank(parseFloat(cleanHoldTime));
 
-  finalTime.textContent = `Time on Ball: ${cleanHoldTime} seconds`;
-  finalRank.textContent = `Rank: ${rank}`;
-  modal.style.display = "flex";
+    finalTime.textContent = `Time on Ball: ${cleanHoldTime} seconds`;
+    finalRank.textContent = `Rank: ${rank}`;
+    modal.style.display = "flex";
 
-  saveTrackingResult(cleanHoldTime, cleanElapsed);
-}
-
+    saveTrackingResult(cleanHoldTime, cleanElapsed);
+  }
 });
 
 function backToMenu() {
@@ -136,11 +145,11 @@ function restartGame() {
 }
 
 function getTrackingRank(holdTime) {
-  if (holdTime >= 12) return "TOP 1%";
-  if (holdTime >= 10) return "TOP 5%";
-  if (holdTime >= 8) return "TOP 10%";
-  if (holdTime >= 6) return "Above Average";
-  if (holdTime >= 4) return "Average";
+  if (holdTime >= 10) return "TOP 1%";
+  if (holdTime >= 8) return "TOP 5%";
+  if (holdTime >= 6) return "TOP 10%";
+  if (holdTime >= 5) return "Above Average";
+  if (holdTime >= 3.5) return "Average";
   if (holdTime >= 2) return "Below Average";
   return "skill issue lil bro";
 }
@@ -152,7 +161,7 @@ function saveTrackingResult(holdTimeStr, totalTimeStr) {
   try {
     data = JSON.parse(localStorage.getItem(key)) || [];
   } catch (e) {
-    console.error("Chyba pri čítaní zo storage:", e);
+    console.error("Error reading localStorage:", e);
   }
 
   const holdTime = parseFloat(holdTimeStr);
@@ -170,9 +179,31 @@ function saveTrackingResult(holdTimeStr, totalTimeStr) {
 
   try {
     localStorage.setItem(key, JSON.stringify(data));
-    console.log("Tracking výsledok uložený:", entry);
+    console.log("Tracking result saved:", entry);
   } catch (e) {
-    console.error("Chyba pri ukladaní do localStorage:", e);
+    console.error("Error saving to localStorage:", e);
   }
 }
+function restartGame() {
+  document.getElementById("results-modal").style.display = "none";
+  window.location.href = "tracking.html";
+}
+function endGame() {
+  clearInterval(moveInterval);
+  clearInterval(speedInterval);
+  clearInterval(timerInterval);
 
+  const modal = document.getElementById("results-modal");
+  const finalTime = document.getElementById("final-hold-time");
+  const finalRank = document.getElementById("final-rank");
+
+  const cleanHoldTime = Math.max(0, timeSpent).toFixed(2);
+  const cleanElapsed = Math.max(0.1, elapsedTime).toFixed(1);
+  const rank = getTrackingRank(parseFloat(cleanHoldTime));
+
+  finalTime.textContent = `Time on Ball: ${cleanHoldTime} seconds`;
+  finalRank.textContent = `Rank: ${rank}`;
+  modal.style.display = "flex";
+
+  saveTrackingResult(cleanHoldTime, cleanElapsed);
+}

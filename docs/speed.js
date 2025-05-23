@@ -72,8 +72,8 @@ function showResult(title, message, rank = "") {
 
 function getRank(time) {
   if (time <= 0.2) return "TOP 1%";
-  if (time <= 0.25) return "TOP 5%";
-  if (time <= 0.3) return "TOP 10%";
+  if (time <= 0.23) return "TOP 5%";
+  if (time <= 0.35) return "TOP 10%";
   if (time <= 0.4) return "Above Average";
   if (time <= 0.5) return "Average";
   if (time <= 0.7) return "Below Average";
@@ -99,4 +99,12 @@ function exitToMenu() {
 function exitToGamemode() {
   document.getElementById("results-modal").style.display = "none";
   window.location.href = "home_page.html";
+}
+function restartGame() {
+  document.getElementById("results-modal").style.display = "none";
+  window.location.href = "speed.html";
+}
+function backToMenu() {
+  document.getElementById("results-modal").style.display = "none";
+  window.location.href = "index.html";
 }

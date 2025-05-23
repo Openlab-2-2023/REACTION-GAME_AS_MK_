@@ -1,7 +1,7 @@
 let score = 0;
 let totalClicks = 0;
 let targetClicks = 0;
-let gameMode = "easy";
+let gameMode = "Easy";
 let timeoutID;
 let fakeTimeoutID;
 let gameTimer;
@@ -39,7 +39,6 @@ function updateTimer() {
 }
 
 function handleGameClick(e) {
-  playSound();
   totalClicks++;
   document.getElementById("score").textContent = `Score: ${score}`;
 }
@@ -145,8 +144,8 @@ function moveTarget() {
   fakeTarget.style.display = "none";
 
   let hideTime = 2000;
-  if (gameMode === "normal") hideTime = 1000;
-  else if (gameMode === "hard") {
+  if (gameMode === "Normal") hideTime = 1000;
+  else if (gameMode === "Hard") {
     hideTime = 1000;
     if (Math.random() > 0.5) {
       let fx = Math.random() * (gameArea.clientWidth - 50);
@@ -157,7 +156,7 @@ function moveTarget() {
       fakeTarget.addEventListener("click", fakeTargetHit);
       fakeTimeoutID = setTimeout(() => fakeTarget.style.display = "none", 700);
     }
-  } else if (gameMode === "ultra-hard") hideTime = 500;
+  } else if (gameMode === "Ultra-Hard") hideTime = 500;
 
   timeoutID = setTimeout(() => {
     target.style.display = "none";

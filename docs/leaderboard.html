@@ -12,7 +12,6 @@
 
   <h1>🏆 Leaderboard</h1>
 
-  <!-- Classic Mode -->
   <div class="mode-section">
     <h2>🎯 Classic Mode</h2>
     <table>
@@ -29,7 +28,6 @@
     </table>
   </div>
 
-  <!-- Tracking Mode -->
   <div class="mode-section">
     <h2>🧭 Tracking Mode</h2>
     <table>
@@ -44,7 +42,6 @@
 
   </div>
 
-  <!-- Speed Mode -->
   <div class="mode-section">
     <h2>⚡ Speed Mode</h2>
     <table>
@@ -58,11 +55,9 @@
     </table>
   </div>
 
-  <!-- Buttons -->
   <button class="btn" onclick="resetLeaderboard()">Reset Leaderboard</button>
   <a href="index.html"><button class="btn">Main Menu</button></a>
 
-  <!-- Leaderboard Script -->
   <script>
     function loadLeaderboard(mode, elementId) {
       const data = JSON.parse(localStorage.getItem("leaderboard_" + mode)) || [];
@@ -72,7 +67,6 @@
       data.slice().reverse().forEach(entry => {
         const row = document.createElement("tr");
 
-        // For tracking and speed modes
         if (mode === "tracking" || mode === "speed") {
           const reactionTime = entry.holdTime || entry.reactionTime || "N/A";
           const rank = entry.averageHold || entry.rank || "N/A";
