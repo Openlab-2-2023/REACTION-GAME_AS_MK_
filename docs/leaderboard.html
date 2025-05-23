@@ -4,114 +4,115 @@
 <head>
   <meta charset="UTF-8" />
   <title>Leaderboard</title>
+  <link rel="icon" type="image/x-icon" href="/docs/favicon.png">
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <div class="leaderboard-wrapper">
+  <div class="leaderboard-wrapper">
 
-  <h1>🏆 Leaderboard</h1>
+    <h1>🏆 Leaderboard</h1>
 
-  <div class="mode-section">
-    <h2>🎯 Classic Mode</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Score</th>
-          <th>Target Hits</th>
-          <th>Miss</th>
-          <th>Accuracy</th>
-          <th>Difficulty</th>
-        </tr>
-      </thead>
-      <tbody id="leaderboard-classic"></tbody>
-    </table>
-  </div>
+    <div class="mode-section">
+      <h2>🎯 Classic Mode</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>Target Hits</th>
+            <th>Miss</th>
+            <th>Accuracy</th>
+            <th>Difficulty</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-classic"></tbody>
+      </table>
+    </div>
 
-  <div class="mode-section">
-    <h2>🧭 Tracking Mode</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Time on Ball (s)</th>
-          <th>Rank</th>
-        </tr>
-      </thead>
-      <tbody id="leaderboard-tracking"></tbody>
-    </table>
+    <div class="mode-section">
+      <h2>🧭 Tracking Mode</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time on Ball (s)</th>
+            <th>Rank</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-tracking"></tbody>
+      </table>
 
-  </div>
+    </div>
 
-  <div class="mode-section">
-    <h2>⚡ Speed Mode</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Time on Ball (s)</th>
-          <th>Rank</th>
-        </tr>
-      </thead>
-      <tbody id="leaderboard-speed"></tbody>
-    </table>
-  </div>
+    <div class="mode-section">
+      <h2>⚡ Speed Mode</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time on Ball (s)</th>
+            <th>Rank</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-speed"></tbody>
+      </table>
+    </div>
 
-  <button class="btn" onclick="resetLeaderboard()">Reset Leaderboard</button>
-  <a href="index.html"><button class="btn">Main Menu</button></a>
+    <button class="btn" onclick="resetLeaderboard()">Reset Leaderboard</button>
+    <a href="index.html"><button class="btn">Main Menu</button></a>
 
-  <script>
-    function loadLeaderboard(mode, elementId) {
-      const data = JSON.parse(localStorage.getItem("leaderboard_" + mode)) || [];
-      const tbody = document.getElementById(elementId);
-      tbody.innerHTML = "";
+    <script>
+      function loadLeaderboard(mode, elementId) {
+        const data = JSON.parse(localStorage.getItem("leaderboard_" + mode)) || [];
+        const tbody = document.getElementById(elementId);
+        tbody.innerHTML = "";
 
-      data.slice().reverse().forEach(entry => {
-        const row = document.createElement("tr");
+        data.slice().reverse().forEach(entry => {
+          const row = document.createElement("tr");
 
-        if (mode === "tracking" || mode === "speed") {
-          const reactionTime = entry.holdTime || entry.reactionTime || "N/A";
-          const rank = entry.averageHold || entry.rank || "N/A";
+          if (mode === "tracking" || mode === "speed") {
+            const reactionTime = entry.holdTime || entry.reactionTime || "N/A";
+            const rank = entry.averageHold || entry.rank || "N/A";
 
-          row.innerHTML = `
+            row.innerHTML = `
             <td>${reactionTime}</td>
             <td>${rank}</td>
           `;
-        }
+          }
 
-        tbody.appendChild(row);
-      });
-    }
+          tbody.appendChild(row);
+        });
+      }
 
-    function loadClassicLeaderboard() {
-      const data = JSON.parse(localStorage.getItem("leaderboard_classic")) || [];
-      const tbody = document.getElementById("leaderboard-classic");
-      tbody.innerHTML = "";
+      function loadClassicLeaderboard() {
+        const data = JSON.parse(localStorage.getItem("leaderboard_classic")) || [];
+        const tbody = document.getElementById("leaderboard-classic");
+        tbody.innerHTML = "";
 
-      data.slice().reverse().forEach(entry => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
+        data.slice().reverse().forEach(entry => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
           <td>${entry.score}</td>
           <td>${entry.hits}</td>
           <td>${entry.misses}</td>
           <td>${entry.accuracy}%</td>
           <td>${entry.mode || "?"}</td>
         `;
-        tbody.appendChild(row);
+          tbody.appendChild(row);
+        });
+      }
+
+      function resetLeaderboard() {
+        localStorage.clear();
+        loadClassicLeaderboard();
+        loadLeaderboard("tracking", "leaderboard-tracking");
+        loadLeaderboard("speed", "leaderboard-speed");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadClassicLeaderboard();
+        loadLeaderboard("tracking", "leaderboard-tracking");
+        loadLeaderboard("speed", "leaderboard-speed");
       });
-    }
-
-    function resetLeaderboard() {
-      localStorage.clear();
-      loadClassicLeaderboard();
-      loadLeaderboard("tracking", "leaderboard-tracking");
-      loadLeaderboard("speed", "leaderboard-speed");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      loadClassicLeaderboard();
-      loadLeaderboard("tracking", "leaderboard-tracking");
-      loadLeaderboard("speed", "leaderboard-speed");
-    });
-  </script>
+    </script>
 </body>
 
 </html>
